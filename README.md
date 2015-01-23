@@ -33,7 +33,7 @@ Simply add the SeoWidget into your UiBinder. It currently supports all the follo
 
 You can also use ui:msg inside the tags to use i18n messages :
 
-```
+```xml
 <seo:SeoWidget>
     <seo:Title>
         <ui:msg description="SEO - MAIN - TITLE">Title</ui:msg>
