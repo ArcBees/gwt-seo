@@ -9,7 +9,7 @@ Simply add the SeoWidget into your UiBinder. It currently supports all the follo
         xmlns:g="urn:import:com.google.gwt.user.client.ui"
         xmlns:seo="urn:import:com.arcbees.seo.widget">
 
-...
+[...]
 
 <seo:SeoWidget>
     <seo:Title>
@@ -28,7 +28,7 @@ Simply add the SeoWidget into your UiBinder. It currently supports all the follo
     <seo:FbAppId>1234567</seo:FbAppId>
 </seo:SeoWidget>
 
-...
+[...]
 ```
 
 You can also use ui:msg inside the tags to use i18n messages :
