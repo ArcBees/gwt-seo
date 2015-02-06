@@ -56,7 +56,7 @@
 
     <ciManagement>
         <system>Team City</system>
-        <url>http://teamcity.arcbees.com/project.html?projectId=ArcBeesOpenSource_GwtSeo&amp;tab=projectOverview</url>
+        <url>http://teamcity.arcbees.com/project.html?projectId=ArcBeesOpenSource_GwtSeo</url>
     </ciManagement>
 
     <repositories>
