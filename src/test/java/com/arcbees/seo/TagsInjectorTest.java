@@ -31,7 +31,6 @@ import com.google.gwt.dom.client.Node;
 import com.google.gwt.dom.client.NodeList;
 import com.google.gwtmockito.GwtMockitoTestRunner;
 
-import static com.arcbees.seo.widget.OgImage.MimeType.JPEG;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -41,6 +40,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import static com.arcbees.seo.widget.OgImage.MimeType.JPEG;
 
 @RunWith(GwtMockitoTestRunner.class)
 public class TagsInjectorTest {

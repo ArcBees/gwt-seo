@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class SeoWidgetGwtTest extends GWTTestCase {
     private static class TagsInjectorCaptor extends TagsInjector {
-        private boolean isInjected = false;
+        private boolean isInjected;
 
         @Override
         public void inject(SeoElements seoElements) {
