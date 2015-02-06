@@ -16,9 +16,11 @@
 
 package com.arcbees.seo;
 
+import static com.arcbees.seo.widget.OgType.TypeValue.WEBSITE;
+
 public class OpenGraph {
     public static class Builder {
-        private String type;
+        private String type = WEBSITE.getValue();
         private Image image;
 
         public Builder withType(String type) {

@@ -56,8 +56,19 @@
 
     <ciManagement>
         <system>Team City</system>
-        <url></url>
+        <url>http://teamcity.arcbees.com/project.html?projectId=ArcBeesOpenSource_GwtSeo&amp;tab=projectOverview</url>
     </ciManagement>
+
+    <repositories>
+        <repository>
+            <id>sonatype.snapshots</id>
+            <name>Sonatype snapshot repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <properties>
         <target.jdk>1.7</target.jdk>
@@ -69,8 +80,9 @@
         <!-- Testing -->
         <jukito.version>1.4.1</jukito.version>
         <junit.version>4.12</junit.version>
-        <mockito.version>1.9.5</mockito.version>
-        <assertj-core.version>1.6.1</assertj-core.version>
+        <mockito.version>2.0.2-beta</mockito.version>
+        <assertj-core.version>1.7.1</assertj-core.version>
+        <gwtmockito.version>1.1.5-SNAPSHOT</gwtmockito.version>
 
         <!-- Maven -->
         <maven-checkstyle-plugin.version>2.13</maven-checkstyle-plugin.version>
@@ -119,10 +131,8 @@
                     <includes>
                         <include>**/*Test.java</include>
                         <include>**/*TestCase.java</include>
+                        <include>**/*GwtTest.java</include>
                     </includes>
-                    <excludes>
-                        <exclude>**/*GwtTest.java</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
 
@@ -186,5 +196,42 @@
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt.gwtmockito</groupId>
+            <artifactId>gwtmockito</artifactId>
+            <version>${gwtmockito.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
