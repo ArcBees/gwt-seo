@@ -58,3 +58,10 @@ Although there are no specific `og:title` and `og:description` tags, they are co
 When the SeoWidget is attached to the DOM, the content is used to generate `<meta>` tags.
 Those tags are then inserted into the `<head>` section. At the moment, nothing is done when the widget is detached.
 A good practice is to define specific SEO components in all your views.
+
+##Thanks to
+[![Arcbees.com](http://i.imgur.com/HDf1qfq.png)](http://arcbees.com)
+
+[![Atlassian](http://i.imgur.com/BKkj8Rg.png)](https://www.atlassian.com/)
+
+[![IntelliJ](https://lh6.googleusercontent.com/--QIIJfKrjSk/UJJ6X-UohII/AAAAAAAAAVM/cOW7EjnH778/s800/banner_IDEA.png)](http://www.jetbrains.com/idea/index.html)
