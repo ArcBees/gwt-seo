@@ -199,6 +199,18 @@ public class TagsInjectorTest {
         then(captor.getValue()).isEqualTo(ANOTHER_VALUE);
     }
 
+    @Test
+    public void injectTag_customTag_isInjected() {
+        // given
+        SeoElements seoElements = getBuilder().withMetaTag(A_PROPERTY, A_VALUE).build();
+
+        // when
+        tagsInjector.inject(seoElements);
+
+        // then
+        verify(headElement, times(DEFAULT_INJECTIONS + 1)).insertFirst(any(Node.class));
+    }
+
     private MetaElement getMetaElementMock(String property, String content) {
         MetaElement mock = mock(MetaElement.class);
         when(mock.getName()).thenReturn(property);
