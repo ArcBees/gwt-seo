@@ -16,17 +16,10 @@
 
 package com.arcbees.seo.widget;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.arcbees.seo.Image;
 import com.arcbees.seo.OpenGraph;
 import com.arcbees.seo.SeoElements;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.HeadElement;
-import com.google.gwt.dom.client.MetaElement;
-import com.google.gwt.dom.client.NodeList;
+import com.arcbees.seo.TagsInjector;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -35,13 +28,19 @@ import com.google.gwt.user.client.ui.Widget;
 public class SeoWidget extends ContainerNode implements AttachEvent.Handler {
     private final Widget widget;
     private final SeoElements.Builder seoBuilder;
+    private final TagsInjector tagsInjector;
 
     public SeoWidget() {
+        this(new TagsInjector());
+    }
+
+    public SeoWidget(TagsInjector tagsInjector) {
         widget = new SimplePanel();
         widget.getElement().getStyle().setDisplay(Style.Display.NONE);
         widget.addAttachHandler(this);
 
-        seoBuilder = new SeoElements.Builder();
+        this.seoBuilder = new SeoElements.Builder();
+        this.tagsInjector = tagsInjector;
     }
 
     public void add(Title title) {
@@ -79,99 +78,12 @@ public class SeoWidget extends ContainerNode implements AttachEvent.Handler {
     @Override
     public void onAttachOrDetach(AttachEvent event) {
         if (event.isAttached()) {
-            inject(seoBuilder.build());
+            tagsInjector.inject(seoBuilder.build());
         }
     }
 
     @Override
     public Widget asWidget() {
         return widget;
-    }
-
-    private void inject(SeoElements seoElements) {
-        if (!isNullOrEmpty(seoElements.getTitle())) {
-            Document.get().setTitle(seoElements.getTitle());
-        }
-
-        setMetaTags(seoElements);
-    }
-
-    private void setMetaTags(SeoElements seoElements) {
-        Map<String, MetaElement> metaElementsMap = getMetaTags();
-
-        setMetaTag(metaElementsMap, "description", seoElements.getDescription());
-        setMetaTag(metaElementsMap, "keywords", seoElements.getKeywords());
-        setMetaTag(metaElementsMap, "fb:app_id", seoElements.getFbAppId());
-
-        OpenGraph openGraph = seoElements.getOpenGraph();
-        if (openGraph == null) {
-            openGraph = new OpenGraph.Builder()
-                    .withType(OgType.TypeValue.WEBSITE.getValue())
-                    .build();
-        }
-
-        setMetaTag(metaElementsMap, "og:title", seoElements.getTitle());
-        setMetaTag(metaElementsMap, "og:description", seoElements.getDescription());
-        setMetaTag(metaElementsMap, "og:type", openGraph.getType());
-
-        Image image = openGraph.getImage();
-        if (image != null) {
-            setMetaTag(metaElementsMap, "og:image", image.getUrl());
-            setMetaTag(metaElementsMap, "og:image:type", image.getMimeType());
-            setMetaTag(metaElementsMap, "og:image:height", toString(image.getHeight()));
-            setMetaTag(metaElementsMap, "og:image:width", toString(image.getWidth()));
-        }
-    }
-
-    private void setMetaTag(
-            Map<String, MetaElement> metaElementsMap,
-            String property,
-            String content) {
-        if (content != null) {
-            MetaElement metaElement = metaElementsMap.get(property);
-
-            if (metaElement == null) {
-                Document document = Document.get();
-
-                metaElement = document.createMetaElement();
-                metaElement.setAttribute("property", property);
-
-                document.getHead().insertFirst(metaElement);
-            }
-
-            metaElement.setContent(content);
-        }
-    }
-
-    private Map<String, MetaElement> getMetaTags() {
-        HeadElement head = Document.get().getHead();
-        NodeList<Element> metaElements = head.getElementsByTagName("meta");
-
-        Map<String, MetaElement> metaElementsMap = new HashMap<>();
-        for (int i = 0; i < metaElements.getLength(); i++) {
-            MetaElement metaElement = (MetaElement) metaElements.getItem(i);
-
-            String name = getPropertyOrName(metaElement);
-
-            metaElementsMap.put(name, metaElement);
-        }
-
-        return metaElementsMap;
-    }
-
-    private String getPropertyOrName(MetaElement metaElement) {
-        String name = metaElement.getName();
-        if (isNullOrEmpty(name)) {
-            name = metaElement.getAttribute("property");
-        }
-        return name;
-    }
-
-    private static boolean isNullOrEmpty(String value) {
-        return value == null || value.isEmpty();
-    }
-
-    private String toString(Integer value) {
-        return value == null ? null : value.toString();
     }
 }
