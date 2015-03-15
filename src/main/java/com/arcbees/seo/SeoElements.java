@@ -26,9 +26,10 @@ public class SeoElements {
         private String keywords;
         private String fbAppId;
         private OpenGraph openGraph;
-        private Map<String, String> customMetaTags = new LinkedHashMap<>();
+        private Map<String, String> customMetaTags;
 
         public Builder() {
+            customMetaTags = new LinkedHashMap<>();
         }
 
         public Builder withTitle(String title) {
