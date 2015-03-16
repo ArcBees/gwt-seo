@@ -75,6 +75,10 @@ public class SeoWidget extends ContainerNode implements AttachEvent.Handler {
         seoBuilder.withFbAppId(fbAppId.getText());
     }
 
+    public void add(Custom custom) {
+        seoBuilder.withMetaTag(custom.getProperty(), custom.getText());
+    }
+
     @Override
     public void onAttachOrDetach(AttachEvent event) {
         if (event.isAttached()) {

@@ -75,6 +75,10 @@ public class TagsInjector {
             setMetaTag(metaElementsMap, "og:image:height", toString(image.getHeight()));
             setMetaTag(metaElementsMap, "og:image:width", toString(image.getWidth()));
         }
+
+        for (Map.Entry<String, String> customMetaTag : seoElements.getCustomMetaTags().entrySet()) {
+            setMetaTag(metaElementsMap, customMetaTag.getKey(), customMetaTag.getValue());
+        }
     }
 
     private void setMetaTag(
@@ -89,6 +93,8 @@ public class TagsInjector {
                 metaElement.setAttribute("property", property);
 
                 document.getHead().insertFirst(metaElement);
+
+                metaElementsMap.put(property, metaElement);
             }
 
             metaElement.setContent(content);

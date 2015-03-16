@@ -16,6 +16,9 @@
 
 package com.arcbees.seo;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class SeoElements {
     public static class Builder {
         private String title;
@@ -23,8 +26,10 @@ public class SeoElements {
         private String keywords;
         private String fbAppId;
         private OpenGraph openGraph;
+        private Map<String, String> customMetaTags;
 
         public Builder() {
+            customMetaTags = new LinkedHashMap<>();
         }
 
         public Builder withTitle(String title) {
@@ -52,6 +57,11 @@ public class SeoElements {
             return this;
         }
 
+        public Builder withMetaTag(String property, String content) {
+            customMetaTags.put(property, content);
+            return this;
+        }
+
         public SeoElements build() {
             SeoElements seoElements = new SeoElements();
 
@@ -60,6 +70,7 @@ public class SeoElements {
             seoElements.setKeywords(keywords);
             seoElements.setFbAppId(fbAppId);
             seoElements.setOpenGraph(openGraph);
+            seoElements.setCustomMetaTags(customMetaTags);
 
             return seoElements;
         }
@@ -70,6 +81,7 @@ public class SeoElements {
     private String keywords;
     private String fbAppId;
     private OpenGraph openGraph;
+    private Map<String, String> customMetaTags;
 
     public String getTitle() {
         return title;
@@ -111,6 +123,14 @@ public class SeoElements {
         this.openGraph = openGraph;
     }
 
+    public Map<String, String> getCustomMetaTags() {
+        return customMetaTags;
+    }
+
+    public void setCustomMetaTags(Map<String, String> customMetaTags) {
+        this.customMetaTags = customMetaTags;
+    }
+
     @Override
     public String toString() {
         return "SeoElements{" +
@@ -119,6 +139,7 @@ public class SeoElements {
                 ", keywords='" + keywords + '\'' +
                 ", fbAppId='" + fbAppId + '\'' +
                 ", openGraph=" + openGraph +
+                ", customMetaTags=" + customMetaTags +
                 '}';
     }
 }
