@@ -9,7 +9,7 @@
 
     <groupId>com.arcbees.seo</groupId>
     <artifactId>gwt-seo</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <name>GWT-SEO</name>
     <inceptionYear>2015</inceptionYear>
     <description>SEO</description>
@@ -46,7 +46,7 @@
         <connection>scm:git:git@github.com:ArcBees/gwt-seo.git</connection>
         <developerConnection>scm:git:git@github.com:ArcBees/gwt-seo.git</developerConnection>
         <url>https://github.com/ArcBees/gwt-seo</url>
-      <tag>gwt-seo-0.1</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <issueManagement>
