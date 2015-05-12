@@ -82,12 +82,12 @@
         <junit.version>4.12</junit.version>
         <mockito.version>2.0.2-beta</mockito.version>
         <assertj-core.version>1.7.1</assertj-core.version>
-        <gwtmockito.version>1.1.5-SNAPSHOT</gwtmockito.version>
+        <gwtmockito.version>1.1.5</gwtmockito.version>
 
         <!-- Maven -->
-        <maven-checkstyle-plugin.version>2.13</maven-checkstyle-plugin.version>
+        <maven-checkstyle-plugin.version>2.15</maven-checkstyle-plugin.version>
         <checkstyle.version>6.2</checkstyle.version>
-        <arcbees-checkstyle.version>1.0-SNAPSHOT</arcbees-checkstyle.version>
+        <arcbees-checkstyle.version>1.1</arcbees-checkstyle.version>
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
         <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
