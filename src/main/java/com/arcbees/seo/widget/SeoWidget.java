@@ -16,10 +16,10 @@
 
 package com.arcbees.seo.widget;
 
-import com.arcbees.seo.Image;
 import com.arcbees.seo.OpenGraph;
 import com.arcbees.seo.SeoElements;
 import com.arcbees.seo.TagsInjector;
+import com.arcbees.seo.TwitterCard;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -50,11 +50,6 @@ public class SeoWidget extends ContainerNode implements AttachEvent.Handler {
     public void add(Og og) {
         OpenGraph.Builder builder = new OpenGraph.Builder();
 
-        OgImage image = og.getImage();
-        if (image != null) {
-            builder.withImage(new Image(image.getText(), image.getHeight(), image.getWidth(), image.getMimeType()));
-        }
-
         OgType ogType = og.getOgType();
         if (ogType != null) {
             builder.withType(ogType.getValue());
@@ -73,6 +68,27 @@ public class SeoWidget extends ContainerNode implements AttachEvent.Handler {
 
     public void add(FbAppId fbAppId) {
         seoBuilder.withFbAppId(fbAppId.getText());
+    }
+
+    public void add(Image image) {
+        seoBuilder.withImage(
+                new com.arcbees.seo.Image(image.getText(), image.getHeight(), image.getWidth(), image.getMimeType()));
+    }
+
+    public void add(Twitter twitter) {
+        TwitterCard.Builder builder = new TwitterCard.Builder();
+
+        TwitterCardType cardType = twitter.getCardType();
+        if (cardType != null) {
+            builder.withCard(cardType.getValue());
+        }
+
+        TwitterSite site = twitter.getSite();
+        if (site != null) {
+            builder.withSite(site.getText());
+        }
+
+        seoBuilder.withTwitterCard(builder.build());
     }
 
     public void add(Custom custom) {

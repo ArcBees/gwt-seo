@@ -16,7 +16,7 @@
 
 package com.arcbees.seo.widget;
 
-public class OgImage extends TextNode {
+public class Image extends TextNode {
     public enum MimeType {
         GIF("image/gif"),
         JPEG("image/jpeg"),
