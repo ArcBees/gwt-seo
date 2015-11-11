@@ -16,14 +16,23 @@
 
 package com.arcbees.seo.widget;
 
-public class Og extends ContainerNode {
-    private OgType ogType;
+public class Twitter extends ContainerNode {
+    private TwitterCardType cardType;
+    private TwitterSite site;
 
-    public void add(OgType ogType) {
-        this.ogType = ogType;
+    public void add(TwitterCardType cardType) {
+        this.cardType = cardType;
     }
 
-    public OgType getOgType() {
-        return ogType;
+    public void add(TwitterSite site) {
+        this.site = site;
+    }
+
+    public TwitterCardType getCardType() {
+        return cardType;
+    }
+
+    public TwitterSite getSite() {
+        return site;
     }
 }

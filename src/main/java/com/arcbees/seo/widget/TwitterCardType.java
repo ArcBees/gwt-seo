@@ -18,20 +18,12 @@ package com.arcbees.seo.widget;
 
 import com.google.gwt.uibinder.client.UiConstructor;
 
-public class OgType extends BaseNode {
+public class TwitterCardType extends BaseNode {
     public enum TypeValue {
-        WEBSITE("website"),
-        SONG("music.song"),
-        ALBUM("music.album"),
-        PLAYLIST("music.playlist"),
-        RADIO_STATION("music.radio_station"),
-        MOVIE("video.movie"),
-        EPISODE("video.episode"),
-        TV_SHOW("video.tv_show"),
-        VIDEO_OTHER("video.other"),
-        ARTICLE("article"),
-        BOOK("book"),
-        PROFILE("profile");
+        SUMMARY("summary"),
+        SUMMARY_LARGE("summary_large_image"),
+        APP("app"),
+        PLAYER("player");
 
         private final String value;
 
@@ -47,7 +39,7 @@ public class OgType extends BaseNode {
     private final TypeValue typeValue;
 
     @UiConstructor
-    public OgType(TypeValue typeValue) {
+    public TwitterCardType(TypeValue typeValue) {
         this.typeValue = typeValue;
     }
 

@@ -60,16 +60,19 @@ public class TagsInjector {
         OpenGraph openGraph = seoElements.getOpenGraph();
         if (openGraph == null) {
             openGraph = new OpenGraph.Builder()
-                    .withType(OgType.TypeValue.WEBSITE.getValue())
+                    .withType(OgType.TypeValue.WEBSITE)
                     .build();
         }
 
         setMetaTag(metaElementsMap, "og:title", seoElements.getTitle());
+        setMetaTag(metaElementsMap, "twitter:title", seoElements.getTitle());
         setMetaTag(metaElementsMap, "og:description", seoElements.getDescription());
+        setMetaTag(metaElementsMap, "twitter:description", seoElements.getDescription());
         setMetaTag(metaElementsMap, "og:type", openGraph.getType());
 
-        Image image = openGraph.getImage();
+        Image image = seoElements.getImage();
         if (image != null) {
+            setMetaTag(metaElementsMap, "twitter:image", image.getUrl());
             setMetaTag(metaElementsMap, "og:image", image.getUrl());
             setMetaTag(metaElementsMap, "og:image:type", image.getMimeType());
             setMetaTag(metaElementsMap, "og:image:height", toString(image.getHeight()));

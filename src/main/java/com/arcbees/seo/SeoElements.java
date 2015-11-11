@@ -26,6 +26,8 @@ public class SeoElements {
         private String keywords;
         private String fbAppId;
         private OpenGraph openGraph;
+        private Image image;
+        private TwitterCard twitterCard;
         private Map<String, String> customMetaTags;
 
         public Builder() {
@@ -57,6 +59,16 @@ public class SeoElements {
             return this;
         }
 
+        public Builder withImage(Image image) {
+            this.image = image;
+            return this;
+        }
+
+        public Builder withTwitterCard(TwitterCard twitterCard) {
+            this.twitterCard = twitterCard;
+            return this;
+        }
+
         public Builder withMetaTag(String property, String content) {
             customMetaTags.put(property, content);
             return this;
@@ -71,6 +83,8 @@ public class SeoElements {
             seoElements.setFbAppId(fbAppId);
             seoElements.setOpenGraph(openGraph);
             seoElements.setCustomMetaTags(customMetaTags);
+            seoElements.setTwitterCard(twitterCard);
+            seoElements.setImage(image);
 
             return seoElements;
         }
@@ -80,7 +94,9 @@ public class SeoElements {
     private String description;
     private String keywords;
     private String fbAppId;
+    private Image image;
     private OpenGraph openGraph;
+    private TwitterCard twitterCard;
     private Map<String, String> customMetaTags;
 
     public String getTitle() {
@@ -123,6 +139,22 @@ public class SeoElements {
         this.openGraph = openGraph;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public TwitterCard getTwitterCard() {
+        return twitterCard;
+    }
+
+    public void setTwitterCard(TwitterCard twitterCard) {
+        this.twitterCard = twitterCard;
+    }
+
     public Map<String, String> getCustomMetaTags() {
         return customMetaTags;
     }
@@ -138,7 +170,9 @@ public class SeoElements {
                 ", description='" + description + '\'' +
                 ", keywords='" + keywords + '\'' +
                 ", fbAppId='" + fbAppId + '\'' +
+                ", image=" + image +
                 ", openGraph=" + openGraph +
+                ", twitterCard=" + twitterCard +
                 ", customMetaTags=" + customMetaTags +
                 '}';
     }

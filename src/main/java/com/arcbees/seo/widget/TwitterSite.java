@@ -16,14 +16,5 @@
 
 package com.arcbees.seo.widget;
 
-public class Og extends ContainerNode {
-    private OgType ogType;
-
-    public void add(OgType ogType) {
-        this.ogType = ogType;
-    }
-
-    public OgType getOgType() {
-        return ogType;
-    }
+public class TwitterSite extends TextNode {
 }

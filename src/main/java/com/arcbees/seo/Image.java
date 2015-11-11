@@ -16,7 +16,7 @@
 
 package com.arcbees.seo;
 
-import com.arcbees.seo.widget.OgImage;
+import com.arcbees.seo.widget.Image.MimeType;
 
 public class Image {
     private final String url;
@@ -28,7 +28,7 @@ public class Image {
             String url,
             Integer height,
             Integer width,
-            OgImage.MimeType type) {
+            MimeType type) {
         this.url = url;
         this.height = height;
         this.width = width;

@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 
-import com.arcbees.seo.widget.OgImage;
+import com.arcbees.seo.widget.Image;
 import com.arcbees.seo.widget.OgType;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -41,7 +41,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import static com.arcbees.seo.widget.OgImage.MimeType.JPEG;
+import static com.arcbees.seo.widget.Image.MimeType.JPEG;
 
 @RunWith(GwtMockitoTestRunner.class)
 public class TagsInjectorTest {
@@ -50,7 +50,7 @@ public class TagsInjectorTest {
     private static final String SOME_KEYWORDS = "SOME_KEYWORDS";
     private static final String FB_APP_ID = "12345";
     private static final String AN_URL = "AN_URL";
-    private static final OgImage.MimeType MIME_TYPE = JPEG;
+    private static final Image.MimeType MIME_TYPE = JPEG;
     private static final int HEIGHT = 480;
     private static final int WIDTH = 480;
     private static final int DEFAULT_INJECTIONS = 1;
@@ -83,7 +83,7 @@ public class TagsInjectorTest {
 
         // then
         verify(document).setTitle(SOME_TITLE);
-        verify(document.getHead(), times(2)).insertFirst(any(Node.class));
+        verify(document.getHead(), times(3)).insertFirst(any(Node.class));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class TagsInjectorTest {
         tagsInjector.inject(seoElements);
 
         // then
-        verify(headElement, times(DEFAULT_INJECTIONS + 2)).insertFirst(any(Node.class));
+        verify(headElement, times(DEFAULT_INJECTIONS + 3)).insertFirst(any(Node.class));
     }
 
     @Test
@@ -156,7 +156,7 @@ public class TagsInjectorTest {
     @Test
     public void injectOpenGraph_withType_isInjected() {
         // given
-        OpenGraph openGraph = new OpenGraph.Builder().withType(OgType.TypeValue.ARTICLE.getValue()).build();
+        OpenGraph openGraph = new OpenGraph.Builder().withType(OgType.TypeValue.ARTICLE).build();
         SeoElements seoElements = getBuilder().withOpenGraph(openGraph).build();
 
         // when
@@ -167,17 +167,18 @@ public class TagsInjectorTest {
     }
 
     @Test
-    public void injectOpenGraph_withImage_isInjected() {
+    public void inject_withImage_isInjected() {
         // given
-        Image image = new Image(AN_URL, HEIGHT, WIDTH, MIME_TYPE);
-        OpenGraph openGraph = new OpenGraph.Builder().withImage(image).build();
-        SeoElements seoElements = getBuilder().withOpenGraph(openGraph).build();
+        com.arcbees.seo.Image image = new com.arcbees.seo.Image(AN_URL, HEIGHT, WIDTH, MIME_TYPE);
+        SeoElements seoElements = getBuilder()
+                .withImage(image)
+                .build();
 
         // when
         tagsInjector.inject(seoElements);
 
         // then
-        verify(headElement, times(DEFAULT_INJECTIONS + 4)).insertFirst(any(Node.class));
+        verify(headElement, times(DEFAULT_INJECTIONS + 5)).insertFirst(any(Node.class));
     }
 
     @Test
