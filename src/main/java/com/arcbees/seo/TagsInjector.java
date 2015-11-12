@@ -79,6 +79,12 @@ public class TagsInjector {
             setMetaTag(metaElementsMap, "og:image:width", toString(image.getWidth()));
         }
 
+        TwitterCard twitterCard = seoElements.getTwitterCard();
+        if (twitterCard != null) {
+            setMetaTag(metaElementsMap, "twitter:card" , twitterCard.getCard());
+            setMetaTag(metaElementsMap, "twitter:site" , twitterCard.getSite());
+        }
+
         for (Map.Entry<String, String> customMetaTag : seoElements.getCustomMetaTags().entrySet()) {
             setMetaTag(metaElementsMap, customMetaTag.getKey(), customMetaTag.getValue());
         }
