@@ -16,17 +16,23 @@
 
 package com.arcbees.seo;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.arcbees.seo.widget.OgType;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.HeadElement;
+import com.google.gwt.dom.client.LinkElement;
 import com.google.gwt.dom.client.MetaElement;
 import com.google.gwt.dom.client.NodeList;
 
 public class TagsInjector {
+    private static final String REL_CANONICAL = "canonical";
+    private static final List<String> META_WITH_NAME = Arrays.asList("description", "keywords", "robots",
+            "twitter:title", "twitter:description", "twitter:image", "twitter:card", "twitter:site");
     private final Document document;
 
     public TagsInjector() {
@@ -44,6 +50,7 @@ public class TagsInjector {
         }
 
         setMetaTags(seoElements);
+        setCanonical(seoElements.getCanonical());
     }
 
     public void setMetaTag(String property, String content) {
@@ -99,7 +106,11 @@ public class TagsInjector {
 
             if (metaElement == null) {
                 metaElement = document.createMetaElement();
-                metaElement.setAttribute("property", property);
+                if (META_WITH_NAME.contains(property)) {
+                    metaElement.setName(property);
+                } else {
+                    metaElement.setAttribute("property", property);
+                }
 
                 document.getHead().insertFirst(metaElement);
 
@@ -132,6 +143,30 @@ public class TagsInjector {
             name = metaElement.getAttribute("property");
         }
         return name;
+    }
+
+    public void setCanonical(String canonical) {
+        HeadElement head = document.getHead();
+        NodeList<Element> linkElements = head.getElementsByTagName("link");
+        LinkElement canonicalLink = null;
+        for (int i = 0; i < linkElements.getLength() && canonicalLink == null; i++) {
+            LinkElement linkElement = (LinkElement) linkElements.getItem(i);
+            if (REL_CANONICAL.equals(linkElement.getRel())) {
+                canonicalLink = linkElement;
+            }
+        }
+        if (isNullOrEmpty(canonical)) {
+            if (canonicalLink != null) {
+                head.removeChild(canonicalLink);
+            }
+        } else {
+            if (canonicalLink == null) {
+                canonicalLink = document.createLinkElement();
+                canonicalLink.setRel(REL_CANONICAL);
+                head.insertFirst(canonicalLink);
+            }
+            canonicalLink.setHref(canonical);
+        }
     }
 
     private static boolean isNullOrEmpty(String value) {
