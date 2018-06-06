@@ -1,3 +1,5 @@
+# This project is read only and was moved to gitlab: [https://gitlab.com/ManfredTremmel/gwt-seo](https://gitlab.com/ManfredTremmel/gwt-seo)
+
 # GWT-SEO
 ## How to use
 
