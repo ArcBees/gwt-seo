@@ -95,6 +95,10 @@ public class SeoWidget extends ContainerNode implements AttachEvent.Handler {
         seoBuilder.withMetaTag(custom.getProperty(), custom.getText());
     }
 
+    public void add(CanonicalLink canonical) {
+        seoBuilder.withCanonical(canonical.getText());
+    }
+
     @Override
     public void onAttachOrDetach(AttachEvent event) {
         if (event.isAttached()) {

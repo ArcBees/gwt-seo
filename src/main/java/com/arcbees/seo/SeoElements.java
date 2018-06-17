@@ -29,6 +29,7 @@ public class SeoElements {
         private Image image;
         private TwitterCard twitterCard;
         private Map<String, String> customMetaTags;
+        private String canonical;
 
         public Builder() {
             customMetaTags = new LinkedHashMap<>();
@@ -74,6 +75,11 @@ public class SeoElements {
             return this;
         }
 
+        public Builder withCanonical(String canonical) {
+            this.canonical = canonical;
+            return this;
+        }
+
         public SeoElements build() {
             SeoElements seoElements = new SeoElements();
 
@@ -85,6 +91,7 @@ public class SeoElements {
             seoElements.setCustomMetaTags(customMetaTags);
             seoElements.setTwitterCard(twitterCard);
             seoElements.setImage(image);
+            seoElements.setCanonical(canonical);
 
             return seoElements;
         }
@@ -98,6 +105,7 @@ public class SeoElements {
     private OpenGraph openGraph;
     private TwitterCard twitterCard;
     private Map<String, String> customMetaTags;
+    private String canonical;
 
     public String getTitle() {
         return title;
@@ -163,6 +171,14 @@ public class SeoElements {
         this.customMetaTags = customMetaTags;
     }
 
+    public String getCanonical() {
+        return canonical;
+    }
+
+    public void setCanonical(String canonical) {
+        this.canonical = canonical;
+    }
+
     @Override
     public String toString() {
         return "SeoElements{" +
@@ -174,6 +190,7 @@ public class SeoElements {
                 ", openGraph=" + openGraph +
                 ", twitterCard=" + twitterCard +
                 ", customMetaTags=" + customMetaTags +
+                ", canonical=" + canonical +
                 '}';
     }
 }
