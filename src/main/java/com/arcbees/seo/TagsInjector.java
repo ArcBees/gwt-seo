@@ -16,7 +16,9 @@
 
 package com.arcbees.seo;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.arcbees.seo.widget.OgType;
@@ -29,6 +31,8 @@ import com.google.gwt.dom.client.NodeList;
 
 public class TagsInjector {
     private static final String REL_CANONICAL = "canonical";
+    private static final List<String> META_WITH_NAME = Arrays.asList("description", "keywords", "robots",
+            "twitter:title", "twitter:description", "twitter:image", "twitter:card", "twitter:site");
     private final Document document;
 
     public TagsInjector() {
@@ -102,7 +106,11 @@ public class TagsInjector {
 
             if (metaElement == null) {
                 metaElement = document.createMetaElement();
-                metaElement.setAttribute("property", property);
+                if (META_WITH_NAME.contains(property)) {
+                    metaElement.setName(property);
+                } else {
+                    metaElement.setAttribute("property", property);
+                }
 
                 document.getHead().insertFirst(metaElement);
 
